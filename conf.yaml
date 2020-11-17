@@ -1,0 +1,13 @@
+dev : "dev"
+  K8S_NS: "sample_namespace"
+  secrets: "sample_s3_secrets"
+  s3_host: "host"
+  node_ip: "ip"
+  job:
+    JOB: "job_name"
+    SERVICE: "job_service"
+    CONF: "sample"
+    DIST: "30111"
+    TL: "sample_list"
+    SCH: "0 * * * *"
+    TYPE: "sample_type"
