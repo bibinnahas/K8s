@@ -74,16 +74,91 @@ generated_yaml=$(mktemp -p /tmp "yamlToDeploy-${dt}.XXXXXXXX.yaml")
 
 cat > "${generated_yaml}" <<EOF
 
-xxx
-xxx
-xxx
-xxx
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: $JOB_NAME
+  namespace: $K8S_NAME_SPACE
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - env:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            - name:
+              value:
+            envFrom:
+            - secretRef:
+                name:
+                optional: false
+            image: ${IMAGE}
+            imagePullPolicy: Always
+            name:
+            volumeMounts:
+            - mountPath: /samplePath/
+              name: job-logs
+            terminationMessagePath: /dev/termination-logs
+            terminationMesasagePolicy: FallbackToLogsOnError
+            port:
+            - containerPort:
+              name:
+              protocol:
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - name: job-logs
+            persistentVolumeClaim:
+              claimName:
+schdule:
+successfulJobsHistoryLimit: 3
+suspend: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["cronjob:$K8S_NAME_SPACE:$JOB_NAME"]'
+  name:
+  namespace:
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name:
+    nodeport:
+    port:
+    protocol:
+    targetPort:
+  selector:
+    workloadID_$SERVICE_NAME: "true"
+  type: NodePort
+status:
+  loadBalancer: {}
 
 EOF
 
 #run kubectl command to start the pods
 kubectl delete -f ${generated_yaml} || true
 kubectl apply -f ${generated_yaml}
+
+sleep 10
 
 
 
