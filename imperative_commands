@@ -1,0 +1,18 @@
+alias k=kubectl
+
+k run busybox --image=busybox -it --rm -- env
+
+kubectl create quota myrq --hard=cpu=1,memory=1G,pods=2
+
+kubectl run nginx --image=nginx --port=80 --dry-run=client -o yaml|kubectl apply -f -
+
+k set image po nginx nginx=nginx:1.7.1
+
+k exec -it nginx -- /bin/sh -c 'i=0; while true; do echo "$i:$(date)"; i=$((i + 1));sleep 1; done'
+
+k exec busyboxpod -c busybox2 -it -- ls
+
+k label po nginx1 nginx2 nginx3 app-
+
+
+
