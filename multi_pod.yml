@@ -7,12 +7,16 @@ metadata:
   name: busyboxpod
 spec:
   containers:
-  - command:
+  - args:
+    - /bin/sh
+    - -c
     - echo hello; sleep 3600
     image: busybox
     name: busybox1
     resources: {}
-  - command:
+  - args:
+    - /bin/sh
+    - -c
     - echo hello; sleep 3600
     image: busybox
     name: busybox2

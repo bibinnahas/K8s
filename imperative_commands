@@ -14,5 +14,7 @@ k exec busyboxpod -c busybox2 -it -- ls
 
 k label po nginx1 nginx2 nginx3 app-
 
+k run nginx --image=nginx --requests=cpu=100m,memory=256Mi --limits=cpu=200m,memory=512Mi --dry-run=client -oyaml
+
 
 
